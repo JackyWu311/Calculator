@@ -1,11 +1,11 @@
-let runningTotal = 0;
+let runningTotal = 0.0;
 let buffer = "0";
 let previousOperator;
 
 const screen = document.querySelector(".screen");
 
 function buttonClick(value) {
-  if (isNaN(parseInt(value))) {
+  if (isNaN(parseFloat(value))) {
     handleSymbol(value);
   } else {
     handleNumber(value);
@@ -23,7 +23,7 @@ function handleSymbol(symbol) {
       if (previousOperator === null) {
         return;
       }
-      flushOperation(parseInt(buffer));
+      flushOperation(parseFloat(buffer));
       previousOperator = null;
       buffer = runningTotal.toString();
       runningTotal = 0;
@@ -41,6 +41,14 @@ function handleSymbol(symbol) {
     case "÷":
       handleMath(symbol);
       break;
+    case ".":
+      if(buffer === "0")
+        buffer = "0."
+      else if(buffer.includes("."))
+        break;
+      else
+        buffer += "."
+      break;
   }
 }
 
@@ -49,7 +57,7 @@ function handleMath(symbol) {
     return;
   }
 
-  const intBuffer = parseInt(buffer);
+  const intBuffer = parseFloat(buffer);
 
   if (runningTotal === 0) {
     runningTotal = intBuffer;
