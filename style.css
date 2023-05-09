@@ -90,6 +90,10 @@ body{
     color: inherit;
 }
 
+.calc-button:last-child:active{
+    background-color: #ffef78;
+}
+
 .calc-button:hover{
     background-color: inherit;
 }
